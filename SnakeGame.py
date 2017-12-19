@@ -59,7 +59,7 @@ def gameOver():
     pygame.display.flip()
     time.sleep(3)
     pygame.quit() #piygame exit
-    sys.exit() #console exit
+    sys.exit() #console exit   or just quit()
 
 # Score function
 def showScore(choice=1):
@@ -73,11 +73,46 @@ def showScore(choice=1):
     playSurface.blit(scoreSurf, scoreRect)
     #pygame.display.flip()
 
+# Game intro
+
+def gameIntro():
+    intro = True
+    while intro:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.event.post(pygame.event.Event(pygame.QUIT))
+
+
+        playSurface.fill(white)
+        largeText = pygame.font.SysFont("monaco", 115)
+        TextSurf = largeText.render("Snake Game", True, green)
+        TextRect = TextSurf.get_rect()
+        TextRect.center = ((720/2), (460/2))
+        playSurface.blit(TextSurf, TextRect)
+        pygame.display.flip() #same as .flip()
+        fpsController.tick(15)
+
+
+
+
+
+
 # Main Logic of the game
+
 while 1:
+
+    #gameIntro()
+
+
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
+            #quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT or event.key == ord("d"):
@@ -151,6 +186,7 @@ while 1:
     pygame.display.flip()
 
     fpsController.tick(20) #game speed
+
 
 
 
